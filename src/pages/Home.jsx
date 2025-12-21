@@ -6,36 +6,22 @@ import dummyEvents from "../components/Club/dummyData";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
-  const token = localStorage.getItem("token");
-
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        if (!token) throw new Error("No token found. Please login again.");
-
         const res = await axios.get(
-          "https://backend-ibb5t0qee-malay-bhavesh-pandyas-projects.vercel.app/api/clubs/getevents",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          "https://backend-ibb5t0qee-malay-bhavesh-pandyas-projects.vercel.app/api/clubs/getevents"
         );
         setEvents([...res.data, ...dummyEvents]);
       } catch (err) {
-        console.error("Error fetching events:", err);
-        toast.error(
-          err.response?.data?.error || "Could not fetch events. Showing dummy events."
-        );
+        toast.error("Could not fetch events!", err);
         setEvents([...dummyEvents]);
-      } finally {
-        setLoading(false);
       }
     };
-
     fetchEvents();
-  }, [token]);
+  }, []);
 
   // Split events based on date
   const now = new Date();
@@ -60,7 +46,7 @@ const Home = () => {
         <img
           src={event.poster}
           alt="Event Poster"
-          className="w-full h-auto mb-3 rounded-lg"
+          className="w-200 h-100 mb-3  rounded-[20px] hover:bg-blue-100"
         />
       )}
       {event.logo && (
@@ -73,13 +59,13 @@ const Home = () => {
       <hr className="my-2" />
       <strong className="block mb-1">Organizer Details:</strong>
       {event.organizer ? (
-        <div className="flex items-center mb-3 gap-2">
-          <span className="text-gray-700 font-semibold">{event.organizer.name}</span>
+        <div className="flex items-center mb-3">
+          <span className="text-gray-700">{event.organizer.name}</span>
           {event.organizer.logo && (
             <img
               src={event.organizer.logo}
               alt="Organizer Logo"
-              className="w-8 h-8 rounded-full"
+              className="w-8 h-8 rounded-full ml-2"
             />
           )}
         </div>
@@ -101,50 +87,42 @@ const Home = () => {
     </div>
   );
 
-  if (loading)
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <span className="text-gray-500">Loading events...</span>
-      </div>
-    );
-
   return (
     <>
-      {/* Club quick links */}
       {role === "club" && (
-        <div className="max-w-xl mx-auto bg-indigo-50 rounded-2xl shadow p-4 my-6 text-center">
+        <div className="max-w-xl mx-auto bg-indigo-50 rounded-[20px] shadow p-4 my-6 text-center">
           <h3 className="text-lg font-bold text-indigo-700 mb-2">
             Club Dashboard Quick Links
           </h3>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/club/info"
-              className="bg-blue-100 text-blue-700 px-5 py-2 rounded-lg font-semibold hover:bg-blue-200 transition"
+              className="bg-blue-100 text-blue-700 px-5 py-2 rounded-[10px] font-semibold hover:bg-blue-200 transition"
             >
               View Club Details
             </Link>
             <Link
               to="/club/addevent"
-              className="bg-green-100 text-green-700 px-5 py-2 rounded-lg font-semibold hover:bg-green-200 transition"
+              className="bg-green-100 text-green-700 px-5 py-2 rounded-[10px] font-semibold hover:bg-green-200 transition"
             >
               Add Event
             </Link>
             <Link
               to="/events"
-              className="bg-purple-100 text-purple-700 px-5 py-2 rounded-lg font-semibold hover:bg-purple-200 transition"
+              className="bg-purple-100 text-purple-700 px-5 py-2 rounded-[10px] font-semibold hover:bg-purple-200 transition"
             >
               View My Events
             </Link>
           </div>
         </div>
       )}
-
-      {/* Upcoming & Past Events */}
       <div className="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen py-10 px-2">
         <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-2">
           EventHub
         </h1>
-        <h2 className="text-xl text-gray-700 text-center mb-8">Upcoming Events</h2>
+        <h2 className="text-xl text-gray-700 text-center mb-8">
+          Upcoming Events
+        </h2>
         <div className="flex flex-wrap justify-center gap-8">
           {upcomingEvents.length === 0 ? (
             <p className="text-center text-gray-600">No upcoming events.</p>
@@ -161,10 +139,30 @@ const Home = () => {
             pastEvents.map(renderEventCard)
           )}
         </div>
+        <button
+          onClick={() => navigate("/chatbot")}
+          className="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg p-4 flex items-center justify-center z-50 transition"
+          aria-label="Open Chatbot"
+        >
+          {/* Chat icon SVG, you can change to any icon you like */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-7 h-7"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 3.866-3.582 7-8 7s-8-3.134-8-7 3.582-7 8-7 8 3.134 8 7z"
+            />
+          </svg>
+        </button>
       </div>
     </>
   );
 };
 
 export default Home;
-
