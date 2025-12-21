@@ -19,7 +19,7 @@ const GetEvent = () => {
         );
         setEvents(res.data || []);
       } catch (err) {
-        setEvents([]);
+        setEvents([], err);
       } finally {
         setLoading(false);
       }

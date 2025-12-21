@@ -12,11 +12,11 @@ const Home = () => {
     const fetchEvents = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/clubs/getevents"
+          "https://backend-alpha-eight-71.vercel.app/api/clubs/getevents"
         );
         setEvents([...res.data, ...dummyEvents]);
       } catch (err) {
-        toast.error("Could not fetch events!");
+        toast.error("Could not fetch events!", err);
         setEvents([...dummyEvents]);
       }
     };

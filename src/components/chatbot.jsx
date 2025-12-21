@@ -16,7 +16,7 @@ function ChatBot() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/chat/chat",
+        "https://backend-alpha-eight-71.vercel.app/api/chat/chat",
         { messages: newMessages },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -44,10 +44,13 @@ function ChatBot() {
         { role: "assistant", content: assistantText },
       ]);
     } catch (error) {
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: "Error in the server." },
-      ]);
+      setMessages(
+        [
+          ...newMessages,
+          { role: "assistant", content: "Error in the server." },
+        ],
+        error
+      );
     } finally {
       setIsLoading(false);
     }

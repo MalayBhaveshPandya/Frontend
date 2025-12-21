@@ -19,7 +19,7 @@ const RegisterClub = () => {
       toast.success("Club Registered! Check Email for OTP.");
       navigate("/club/otp");
     } catch (error) {
-      toast.error("Club Registration Failed!");
+      toast.error("Club Registration Failed!", error);
     }
   };
 

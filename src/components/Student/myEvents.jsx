@@ -15,7 +15,7 @@ const MyRegisteredEvents = () => {
         );
         setEvents(res.data || []);
       } catch (err) {
-        setEvents([]);
+        setEvents([], err);
       } finally {
         setLoading(false);
       }

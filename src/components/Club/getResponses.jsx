@@ -17,7 +17,7 @@ const RegistrationList = () => {
         );
         setRegistrations(res.data || []);
       } catch (err) {
-        setRegistrations([]);
+        setRegistrations([],err);
       } finally {
         setLoading(false);
       }

@@ -14,7 +14,7 @@ const StudentInfo = () => {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("No token found, please log in first.");
         const response = await axios.get(
-          "http://localhost:3000/api/student/getstudent",
+          "https://backend-alpha-eight-71.vercel.app/api/student/getstudent",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setStudent(response.data);

@@ -13,11 +13,11 @@ const RegisterEvent = () => {
     const fetchEvent = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/student/event/${eventId}`
+          `https://backend-alpha-eight-71.vercel.app/api/student/event/${eventId}`
         );
         setEvent(res.data);
       } catch (err) {
-        toast.error("Could not fetch event.");
+        toast.error("Could not fetch event.", err);
       }
     };
     fetchEvent();
@@ -36,7 +36,7 @@ const RegisterEvent = () => {
 
     try {
       await axios.post(
-        `http://localhost:3000/api/student/events/${eventId}/register`,
+        `https://backend-alpha-eight-71.vercel.app/api/student/events/${eventId}/register`,
         { responses }, // matches backend expectation
         {
           headers: { Authorization: `Bearer ${token}` },
