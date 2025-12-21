@@ -17,7 +17,7 @@ import GetEvent from "./components/Club/getevents.jsx";
 import MyRegisteredEvents from "./components/Student/myEvents.jsx";
 import AdminClubApproval from "./components/Admin/adminClubApproval.jsx";
 import AdminLogin from "./components/Admin/login.jsx";
-import HowToUse from "./components/howtouse.jsx";
+import HowToUse from "./components/howToUse.jsx";
 import Footer from "./components/footer.jsx";
 import Navbar from "./components/navbar.jsx";
 import ClubNavbar from "./components/Club/clubNavbar.jsx";
