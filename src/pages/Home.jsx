@@ -12,7 +12,7 @@ const Home = () => {
     const fetchEvents = async () => {
       try {
         const res = await axios.get(
-          "https://backend-alpha-eight-71.vercel.app/api/clubs/getevents"
+          "https://backend-ibb5t0qee-malay-bhavesh-pandyas-projects.vercel.app/api/clubs/getevents"
         );
         setEvents([...res.data, ...dummyEvents]);
       } catch (err) {

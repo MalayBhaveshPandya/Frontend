@@ -13,7 +13,7 @@ const RegisterStudent = () => {
       department: e.target.department.value,
       division: e.target.division.value,
       rollno: e.target.rollno.value,
-      year: e.target.year.value,
+      year: Number(e.target.year.value),
       password: e.target.password.value,
     };
     try {
@@ -26,7 +26,15 @@ const RegisterStudent = () => {
       await localStorage.setItem("email", response.data.email);
       navigate("/student/otp");
     } catch (error) {
-      console.error(error);
+      if (error.response) {
+        console.error("Server Error:", error.response.data);
+        alert(error.response.data.error || "Something went wrong!");
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Axios Error:", error.message);
+        alert("An error occurred. Please try again.");
+      }
     }
   };
 

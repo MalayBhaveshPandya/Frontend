@@ -21,7 +21,7 @@ const Otpc = () => {
       toast.success("OTP Verified!");
       navigate("/club/login");
     } catch (error) {
-      toast.error("OTP Verification Failed!");
+      toast.error("OTP Verification Failed!",error);
     }
   };
 

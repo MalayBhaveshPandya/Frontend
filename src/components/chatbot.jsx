@@ -16,7 +16,7 @@ function ChatBot() {
 
     try {
       const response = await axios.post(
-        "https://backend-alpha-eight-71.vercel.app/api/chat/chat",
+        "https://backend-ibb5t0qee-malay-bhavesh-pandyas-projects.vercel.app/api/chat/chat",
         { messages: newMessages },
         { headers: { "Content-Type": "application/json" } }
       );
