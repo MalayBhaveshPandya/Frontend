@@ -13,7 +13,7 @@ const AdminClubApproval = () => {
 
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          "http://localhost:3000/api/admin/all-clubs",
+          "https://backend-alpha-eight-71.vercel.app/api/admin/all-clubs",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
